@@ -10,7 +10,7 @@ import platform
 SRC_FONT_SIZE = 15
 TRANS_FONT_SIZE = 17
 FONT_NAME = 'Arial'
-TRANS_FONT_NAME = 'Arial'
+TRANS_FONT_NAME = 'LXGW WenKai'
 
 # Linux need to install google noto fonts: apt-get install fonts-noto
 if platform.system() == 'Linux':
@@ -21,10 +21,11 @@ SRC_FONT_COLOR = '&HFFFFFF'
 SRC_OUTLINE_COLOR = '&H000000'
 SRC_OUTLINE_WIDTH = 1
 SRC_SHADOW_COLOR = '&H80000000'
-TRANS_FONT_COLOR = '&H00FFFF'
+TRANS_FONT_COLOR = '&H00FFFE'
 TRANS_OUTLINE_COLOR = '&H000000'
 TRANS_OUTLINE_WIDTH = 1 
 TRANS_BACK_COLOR = '&H33000000'
+TRANS_BORDER_STYLE = 1
 
 OUTPUT_DIR = "output"
 OUTPUT_VIDEO = f"{OUTPUT_DIR}/output_sub.mp4"
@@ -75,7 +76,7 @@ def merge_subtitles_to_video():
             f"ShadowColour={SRC_SHADOW_COLOR},BorderStyle=1',"
             f"subtitles={TRANS_SRT}:force_style='FontSize={TRANS_FONT_SIZE},FontName={TRANS_FONT_NAME},"
             f"PrimaryColour={TRANS_FONT_COLOR},OutlineColour={TRANS_OUTLINE_COLOR},OutlineWidth={TRANS_OUTLINE_WIDTH},"
-            f"BackColour={TRANS_BACK_COLOR},Alignment=2,MarginV=27,BorderStyle=4'"
+            f"BackColour={TRANS_BACK_COLOR},Alignment=2,MarginV=27,ShadowColour={SRC_SHADOW_COLOR},BorderStyle={TRANS_BORDER_STYLE}'"
         ).encode('utf-8'),
     ]
 
