@@ -127,8 +127,28 @@ def split_for_sub_main():
         src = split_src
         trans = split_trans
 
+    # 保存分割后的字幕到 Excel 文件
     pd.DataFrame({'Source': split_src, 'Translation': split_trans}).to_excel(OUTPUT_SPLIT_FILE, index=False)
+    
+    # 检查 src 和 remerged 的长度是否一致
+    if len(src) != len(remerged):
+        console.print(f"[bold red]⚠️ Warning: Source ({len(src)}) and remerged subtitles ({len(remerged)}) have different lengths.[/bold red]")
+        
+        # 打印不一致的列表元素
+        if len(src) > len(remerged):
+            console.print(f"[bold yellow]📋 Extra elements in 'src': {src[len(remerged):]}[/bold yellow]")
+        else:
+            console.print(f"[bold yellow]📋 Extra elements in 'remerged': {remerged[len(src):]}[/bold yellow]")
+        
+        # 填充较短的列表以确保长度一致
+        max_length = max(len(src), len(remerged))
+        src += [""] * (max_length - len(src))
+        remerged += [""] * (max_length - len(remerged))
+        console.print("[bold green]🛠️ Filled shorter list with empty strings to match lengths.[/bold green]")
+
+    # 保存重新合并的字幕到 Excel 文件
     pd.DataFrame({'Source': src, 'Translation': remerged}).to_excel(OUTPUT_REMERGED_FILE, index=False)
+    console.print("[bold green]✅ Subtitles splitting process completed.[/bold green]")
 
 if __name__ == '__main__':
     split_for_sub_main()
