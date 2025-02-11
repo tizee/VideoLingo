@@ -5,7 +5,8 @@ from rich import print as rprint
 import subprocess
 
 from core.config_utils import load_key
-from core.all_whisper_methods.demucs_vl import demucs_main, RAW_AUDIO_FILE, VOCAL_AUDIO_FILE
+# from core.all_whisper_methods.demucs_vl import demucs_main, RAW_AUDIO_FILE, VOCAL_AUDIO_FILE
+from core.all_whisper_methods.demucs_vl import RAW_AUDIO_FILE, VOCAL_AUDIO_FILE
 from core.all_whisper_methods.audio_preprocess import process_transcription, convert_video_to_audio, split_audio, save_results, compress_audio, CLEANED_CHUNKS_EXCEL_PATH
 from core.step1_ytdlp import find_video_files
 
@@ -14,6 +15,7 @@ ENHANCED_VOCAL_PATH = "output/audio/enhanced_vocals.mp3"
 
 def enhance_vocals(vocals_ratio=2.50):
     """Enhance vocals audio volume"""
+    return RAW_AUDIO_FILE
     if not load_key("demucs"):
         return RAW_AUDIO_FILE
         
@@ -42,7 +44,8 @@ def transcribe():
 
     # step1 Demucs vocal separation:
     if load_key("demucs"):
-        demucs_main()
+        pass
+        # demucs_main()
     
     # step2 Compress audio
     choose_audio = enhance_vocals() if load_key("demucs") else RAW_AUDIO_FILE

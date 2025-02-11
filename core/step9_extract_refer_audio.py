@@ -7,7 +7,8 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
 import pandas as pd
 import soundfile as sf
 console = Console()
-from core.all_whisper_methods.demucs_vl import demucs_main, VOCAL_AUDIO_FILE
+# from core.all_whisper_methods.demucs_vl import demucs_main, VOCAL_AUDIO_FILE
+from core.all_whisper_methods.demucs_vl import VOCAL_AUDIO_FILE
 
 # Simplified path definitions
 REF_DIR = 'output/audio/refers'
@@ -28,7 +29,10 @@ def extract_audio(audio_data, sr, start_time, end_time, out_file):
     sf.write(out_file, audio_data[start:end], sr)
 
 def extract_refer_audio_main():
-    demucs_main() #!!! in case demucs is not run
+    print("..........RUN demucs..........")
+    print("..........RUN demucs..........")
+    print("..........RUN demucs..........")
+    # demucs_main() #!!! in case demucs is not run
     if os.path.exists(os.path.join(SEG_DIR, '1.wav')):
         rprint(Panel("Audio segments already exist, skipping extraction", title="Info", border_style="blue"))
         return

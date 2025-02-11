@@ -70,10 +70,10 @@ def page_setting():
                 update_key("target_language", target_language)
                 st.rerun()
 
-        demucs = st.toggle(t("Vocal separation enhance"), value=load_key("demucs"), help=t("Recommended for videos with loud background noise, but will increase processing time"))
-        if demucs != load_key("demucs"):
-            update_key("demucs", demucs)
-            st.rerun()
+        # demucs = st.toggle(t("Vocal separation enhance"), value=load_key("demucs"), help=t("Recommended for videos with loud background noise, but will increase processing time"))
+        # if demucs != load_key("demucs"):
+        #    update_key("demucs", demucs)
+        #    st.rerun()
         
         burn_subtitles = st.toggle(t("Burn-in Subtitles"), value=load_key("burn_subtitles"), help=t("Whether to burn subtitles into the video, will increase processing time"))
         if burn_subtitles != load_key("burn_subtitles"):
@@ -143,8 +143,9 @@ def page_setting():
 
 def check_api():
     try:
-        resp = ask_gpt("This is a test, response 'message':'success' in json format.", 
+        resp = ask_gpt("This is a test, response 'message':'success' in json format. DO not use markdown or anything else. Just reply the json message.", 
                       response_json=True, log_title='None')
+        print(resp);
         return resp.get('message') == 'success'
     except Exception:
         return False
